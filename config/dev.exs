@@ -36,7 +36,7 @@ config :phoenix, :stacktrace_depth, 20
 config :joshua, Joshua.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
+  password: "mysecretpassword",
   database: "joshua_dev",
-  hostname: "localhost",
+  hostname: "172.17.0.2",
   pool_size: 10

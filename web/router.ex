@@ -17,11 +17,10 @@ defmodule Joshua.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
-    resources "/badges", BadgeController, except: [:new, :edit]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", Joshua do
-  #   pipe_through :api
-  # end
+  scope "/api", Joshua do
+    pipe_through :api
+    resources "/badges", BadgeController, except: [:new, :edit]
+  end
 end

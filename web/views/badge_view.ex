@@ -2,11 +2,11 @@ defmodule Joshua.BadgeView do
   use Joshua.Web, :view
 
   def render("index.json", %{badges: badges}) do
-    %{data: render_many(badges, Joshua.BadgeView, "badge.json")}
+    render_many(badges, Joshua.BadgeView, "badge.json")
   end
 
   def render("show.json", %{badge: badge}) do
-    %{data: render_one(badge, Joshua.BadgeView, "badge.json")}
+    render_one(badge, Joshua.BadgeView, "badge.json")
   end
 
   def render("badge.json", %{badge: badge}) do

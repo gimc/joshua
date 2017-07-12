@@ -21,6 +21,7 @@ defmodule Joshua.Router do
 
   scope "/api", Joshua do
     pipe_through :api
-    resources "/badges", BadgeController, except: [:new, :edit]
+    resources "/badges", BadgeController
+    resources "/events", EventController, except: [:edit]
   end
 end

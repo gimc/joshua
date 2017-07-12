@@ -38,5 +38,5 @@ config :joshua, Joshua.Repo,
   username: "postgres",
   password: "mysecretpassword",
   database: "joshua_dev",
-  hostname: "172.17.0.2",
+  hostname: "172.17.0.3",
   pool_size: 10

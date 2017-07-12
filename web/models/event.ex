@@ -1,6 +1,11 @@
 defmodule Joshua.Event do
   use Joshua.Web, :model
 
+  @type t :: %__MODULE__{
+    name: String.t(),
+    user_id: integer
+  }
+
   schema "events" do
     field :name, :string
     field :user_id, :integer

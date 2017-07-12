@@ -1,6 +1,14 @@
 defmodule Joshua.Badge do
   use Joshua.Web, :model
 
+  @type t :: %__MODULE__{
+    name: String.t(),
+    description: String.t(),
+    icon: String.t(),
+    count: integer,
+    event_name: String.t()
+  }
+
   schema "badges" do
     field :name, :string
     field :description, :string

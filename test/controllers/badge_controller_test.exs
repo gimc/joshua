@@ -11,13 +11,13 @@ defmodule Joshua.BadgeControllerTest do
 
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, badge_path(conn, :index)
-    assert json_response(conn, 200)["data"] == []
+    assert json_response(conn, 200) == []
   end
 
   test "shows chosen resource", %{conn: conn} do
     badge = Repo.insert! %Badge{}
     conn = get conn, badge_path(conn, :show, badge)
-    assert json_response(conn, 200)["data"] == %{"id" => badge.id,
+    assert json_response(conn, 200) == %{"id" => badge.id,
       "name" => badge.name,
       "description" => badge.description,
       "icon" => badge.icon,
@@ -33,7 +33,7 @@ defmodule Joshua.BadgeControllerTest do
 
   test "creates and renders resource when data is valid", %{conn: conn} do
     conn = post conn, badge_path(conn, :create), badge: @valid_attrs
-    assert json_response(conn, 201)["data"]["id"]
+    assert json_response(conn, 201)["id"]
     assert Repo.get_by(Badge, @valid_attrs)
   end
 
@@ -45,7 +45,7 @@ defmodule Joshua.BadgeControllerTest do
   test "updates and renders chosen resource when data is valid", %{conn: conn} do
     badge = Repo.insert! %Badge{}
     conn = put conn, badge_path(conn, :update, badge), badge: @valid_attrs
-    assert json_response(conn, 200)["data"]["id"]
+    assert json_response(conn, 200)["id"]
     assert Repo.get_by(Badge, @valid_attrs)
   end
 

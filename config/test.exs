@@ -13,7 +13,7 @@ config :logger, level: :warn
 config :joshua, Joshua.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
-  password: "postgres",
-  database: "joshua_test",
-  hostname: "localhost",
+  password: "mysecretpassword",
+  database: "joshua_dev",
+  hostname: "172.17.0.3",
   pool: Ecto.Adapters.SQL.Sandbox

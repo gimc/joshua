@@ -1,4 +1,5 @@
 defmodule Joshua.Progress do
+  use Joshua.Web, :model
 
   defstruct [:name, :count, :required, :achieved]
 

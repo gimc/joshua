@@ -41,7 +41,7 @@ defmodule Joshua.Badge do
 
     badges
     |> Enum.map(fn (badge) ->
-      count = aggregated_events[badge.event_name]
+      count = aggregated_events[badge.event_name] || 0
       %Progress{
         name: badge.name,
         count: min(count, badge.count),

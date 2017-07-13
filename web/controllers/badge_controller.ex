@@ -8,7 +8,7 @@ defmodule Joshua.BadgeController do
     render(conn, "index.json", badges: badges)
   end
 
-  def create(conn, %{"badge" => badge_params}) do
+  def create(conn, badge_params) do
     changeset = Badge.changeset(%Badge{}, badge_params)
 
     case Repo.insert(changeset) do

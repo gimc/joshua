@@ -38,5 +38,7 @@ defmodule Joshua.Endpoint do
     key: "_joshua_key",
     signing_salt: "/F5+8G7g"
 
+  plug CORSPlug
+
   plug Joshua.Router
 end

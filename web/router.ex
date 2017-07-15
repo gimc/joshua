@@ -11,4 +11,7 @@ defmodule Joshua.Router do
     resources "/events", EventController, except: [:edit, :new]
     resources "/progress", ProgressController, only: [:show]
   end
+
+  forward "/graphql", Absinthe.Plug, schema: Joshua.Schema
+  forward "/graphiql", Absinthe.Plug.GraphiQL, schema: Joshua.Schema
 end

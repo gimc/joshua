@@ -14,6 +14,6 @@ config :joshua, Joshua.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "mysecretpassword",
-  database: "joshua_dev",
+  database: "joshua_test",
   hostname: "172.17.0.3",
   pool: Ecto.Adapters.SQL.Sandbox

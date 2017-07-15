@@ -2,7 +2,13 @@ defmodule Joshua.BadgeControllerTest do
   use Joshua.ConnCase
 
   alias Joshua.Badge
-  @valid_attrs %{count: 42, description: "some content", event_name: "some content", icon: "some content", name: "some content"}
+  @valid_attrs %{
+    count: 42,
+    description: "some content",
+    event_name: "some content",
+    icon: "some content",
+    name: "some content"
+  }
   @invalid_attrs %{}
 
   setup %{conn: conn} do
@@ -32,7 +38,7 @@ defmodule Joshua.BadgeControllerTest do
   end
 
   test "creates and renders resource when data is valid", %{conn: conn} do
-    conn = post conn, badge_path(conn, :create), badge: @valid_attrs
+    conn = post conn, badge_path(conn, :create), @valid_attrs
     assert json_response(conn, 201)["id"]
     assert Repo.get_by(Badge, @valid_attrs)
   end

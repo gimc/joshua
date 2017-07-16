@@ -3,6 +3,7 @@ defmodule Joshua.Schema do
 
   alias Joshua.Repo
   alias Joshua.Badge
+  alias Joshua.Event
   alias Joshua.Progress
 
   object :badge do
@@ -22,6 +23,12 @@ defmodule Joshua.Schema do
     field :achieved, :boolean
   end
 
+  object :event do
+    field :id, :id
+    field :name, :string
+    field :user_id, :integer
+  end
+
   query do
     @desc "Get all badges"
     field :badges, list_of(:badge) do
@@ -35,6 +42,20 @@ defmodule Joshua.Schema do
       arg :user_id, non_null(:integer)
       resolve fn %{user_id: user_id}, _ ->
         {:ok, Progress.by_user_id(user_id)}
+      end
+    end
+  end
+
+  mutation do
+    @desc "Create an event"
+    field :event, type: :event do
+      arg :name, non_null(:string)
+      arg :user_id, non_null(:integer)
+
+      resolve fn args, _ ->
+        %Event{}
+        |> Event.changeset(args)
+        |> Repo.insert()
       end
     end
   end

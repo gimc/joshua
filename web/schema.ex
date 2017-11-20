@@ -1,6 +1,8 @@
 defmodule Joshua.Schema do
   use Absinthe.Schema
 
+  import_types Absinthe.Type.Custom
+
   alias Joshua.Repo
   alias Joshua.Badge
   alias Joshua.Event
@@ -20,7 +22,7 @@ defmodule Joshua.Schema do
     field :name, :string
     field :count, :integer
     field :required, :integer
-    field :achieved, :boolean
+    field :date_achieved, :naive_datetime
   end
 
   object :event do

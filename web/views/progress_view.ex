@@ -9,6 +9,7 @@ defmodule Joshua.ProgressView do
     %{name: progress.name,
       count: progress.count,
       required: progress.required,
-      achieved: progress.achieved}
+      date_achieved: progress.date_achieved
+    }
   end
 end

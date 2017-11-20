@@ -33,21 +33,28 @@ defmodule Joshua.Badge do
 
   @spec progress(badges :: [Badge.t()], events :: [Event.t()]) :: [Progress.t()]
   def progress(badges, events) do
-    aggregated_events =
-      events
-      |> Enum.reduce(%{}, fn (event, acc) ->
-        Map.update(acc, event.name, 1, &(&1 + 1))
-      end)
+    events_by_date = Enum.sort(events, &(NaiveDateTime.compare(&1.inserted_at, &2.inserted_at) != :gt))
 
     badges
     |> Enum.map(fn (badge) ->
-      count = aggregated_events[badge.event_name] || 0
+      {num_events, date_achieved} = reduce_event_list(badge, events_by_date)
+
       %Progress{
         name: badge.name,
-        count: min(count, badge.count),
+        count: num_events,
         required: badge.count,
-        achieved: count >= badge.count
+        date_achieved: date_achieved
       }
     end)
   end
+
+  def reduce_event_list(_badge, []), do: {0, nil}
+  def reduce_event_list(badge, events) do
+    events
+    |> Enum.filter(&(&1.name == badge.event_name))
+    |> Enum.reduce_while({1, nil}, fn event, {num_events, _date} ->
+      if num_events == badge.count, do: {:halt, {num_events, event.inserted_at}}, else: {:cont, {num_events + 1, nil}}
+    end)
+end
+
 end

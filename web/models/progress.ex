@@ -5,20 +5,18 @@ defmodule Joshua.Progress do
   alias Joshua.Event
   alias Joshua.Repo
 
-  defstruct [:name, :count, :required, :achieved]
+  defstruct [:name, :count, :required, :date_achieved]
 
   @type t :: %__MODULE__{
     name: String.t(),
     count: integer,
     required: integer,
-    achieved: boolean
+    date_achieved: NaiveDateTime.t()
   }
 
   def by_user_id(user_id) do
     badges = Repo.all(Badge)
-    user_event_query = from e in Event, where: e.user_id == ^user_id
-    user_events = Repo.all(user_event_query)
-    Badge.progress(badges, user_events)
+    Badge.progress(badges, Event.user_events(user_id))
   end
 
 end
